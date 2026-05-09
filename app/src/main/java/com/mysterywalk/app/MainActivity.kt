@@ -1,4 +1,4 @@
-package com.example.mysterywalkapp
+package com.mysterywalk.app
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,8 +11,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.mysterywalkapp.ui.theme.MysteryWalkAppTheme
+import com.mysterywalk.app.ui.theme.MysteryWalkAppTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +23,7 @@ class MainActivity : ComponentActivity() {
             MysteryWalkAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
-                        name = "Android",
+                        name = "Mystery Walk",
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
@@ -42,6 +44,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
     MysteryWalkAppTheme {
-        Greeting("Android")
+        Greeting("Mystery Walk")
     }
 }

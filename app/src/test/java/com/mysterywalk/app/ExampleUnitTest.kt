@@ -1,4 +1,4 @@
-package com.example.mysterywalkapp
+package com.mysterywalk.app
 
 import org.junit.Test
 
