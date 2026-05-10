@@ -6,6 +6,7 @@ import com.google.android.gms.location.LocationServices
 import com.mysterywalk.app.data.location.DefaultLocationClient
 import com.mysterywalk.app.data.location.LocationClient
 import com.mysterywalk.app.data.remote.OverpassApi
+import com.mysterywalk.app.data.remote.WikimediaApi
 import com.mysterywalk.app.data.repository.SpotRepositoryImpl
 import com.mysterywalk.app.data.sensor.CompassSensor
 import com.mysterywalk.app.data.sensor.DefaultCompassSensor
@@ -38,6 +39,16 @@ object AppModule {
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
             .create(OverpassApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideWikimediaApi(moshi: Moshi): WikimediaApi {
+        return Retrofit.Builder()
+            .baseUrl("https://commons.wikimedia.org/")
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .build()
+            .create(WikimediaApi::class.java)
     }
 
     @Provides

@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -19,11 +20,13 @@ import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
 fun NavScreen(
+    onArrived: (distance: Int, lat: Double, lon: Double, name: String?, category: String?) -> Unit,
     viewModel: NavigationViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val navState by viewModel.navigationManager.navState.collectAsState()
     val isArrived by viewModel.navigationManager.isArrived.collectAsState()
+    val targetSpot by viewModel.navigationManager.targetSpot.collectAsState()
 
     Surface(modifier = Modifier.fillMaxSize()) {
         Column(
@@ -46,6 +49,12 @@ fun NavScreen(
                 }
                 is NavUiState.Navigating -> {
                     if (isArrived) {
+                        LaunchedEffect(Unit) {
+                            val dest = targetSpot
+                            if (dest != null) {
+                                onArrived(navState?.distanceMeters ?: 0, dest.lat, dest.lon, dest.name, dest.category)
+                            }
+                        }
                         Text("🎉 到着しました！", fontSize = 32.sp, fontWeight = FontWeight.Bold, color = Color.Green)
                         Spacer(modifier = Modifier.height(32.dp))
                         Button(onClick = { viewModel.stopNavigation() }) {

@@ -48,6 +48,7 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.material.icons.extended)
 
     // AndroidX Core
     implementation(libs.androidx.core.ktx)
@@ -83,6 +84,9 @@ dependencies {
 
     // DataStore Preferences
     implementation(libs.androidx.datastore.preferences)
+
+    // Image Loading
+    implementation(libs.coil.compose)
 
     // Location (Google Play Services)
     implementation(libs.play.services.location)

@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -15,7 +17,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.activity.result.contract.ActivityResultContracts
 import android.Manifest
 import android.os.Build
-import com.mysterywalk.app.ui.navigation.NavScreen
+import androidx.navigation.compose.rememberNavController
+import com.mysterywalk.app.ui.navigation.AppNavGraph
 import com.mysterywalk.app.ui.theme.MysteryWalkAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -43,14 +46,14 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MysteryWalkAppTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Box(modifier = Modifier.padding(innerPadding)) {
-                        NavScreen()
-                    }
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    val navController = rememberNavController()
+                    AppNavGraph(navController = navController)
                 }
             }
         }
     }
 }
-
-
