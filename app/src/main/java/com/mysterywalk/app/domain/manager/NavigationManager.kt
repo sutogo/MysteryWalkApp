@@ -14,8 +14,14 @@ import javax.inject.Singleton
  */
 @Singleton
 class NavigationManager @Inject constructor() {
+    private val _startSpot = MutableStateFlow<Spot?>(null)
+    val startSpot: StateFlow<Spot?> = _startSpot.asStateFlow()
+
     private val _targetSpot = MutableStateFlow<Spot?>(null)
     val targetSpot: StateFlow<Spot?> = _targetSpot.asStateFlow()
+
+    private val _isReturnMode = MutableStateFlow(false)
+    val isReturnMode: StateFlow<Boolean> = _isReturnMode.asStateFlow()
 
     private val _navState = MutableStateFlow<NavigationState?>(null)
     val navState: StateFlow<NavigationState?> = _navState.asStateFlow()
@@ -23,10 +29,24 @@ class NavigationManager @Inject constructor() {
     private val _isArrived = MutableStateFlow(false)
     val isArrived: StateFlow<Boolean> = _isArrived.asStateFlow()
 
-    fun setTarget(spot: Spot) {
+    fun setTarget(spot: Spot, start: Spot? = null) {
         _targetSpot.value = spot
+        if (start != null) {
+            _startSpot.value = start
+        }
+        _isReturnMode.value = false
         _isArrived.value = false
         _navState.value = null
+    }
+
+    fun enableReturnMode() {
+        val returnSpot = _startSpot.value
+        if (returnSpot != null) {
+            _targetSpot.value = returnSpot
+            _isReturnMode.value = true
+            _isArrived.value = false
+            _navState.value = null
+        }
     }
 
     fun updateNavState(state: NavigationState) {
@@ -37,8 +57,10 @@ class NavigationManager @Inject constructor() {
     }
     
     fun clear() {
+        _startSpot.value = null
         _targetSpot.value = null
         _navState.value = null
         _isArrived.value = false
+        _isReturnMode.value = false
     }
 }

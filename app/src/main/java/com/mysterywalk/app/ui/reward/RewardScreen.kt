@@ -33,6 +33,7 @@ fun RewardScreen(
     name: String?,
     category: String?,
     onFinishClick: () -> Unit,
+    onReturnClick: () -> Unit,
     viewModel: RewardViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -47,7 +48,8 @@ fun RewardScreen(
         } else {
             RewardContent(
                 uiState = uiState,
-                onFinishClick = onFinishClick
+                onFinishClick = onFinishClick,
+                onReturnClick = onReturnClick
             )
 
             // Confetti Animation
@@ -68,7 +70,8 @@ fun RewardScreen(
 @Composable
 private fun RewardContent(
     uiState: RewardUiState,
-    onFinishClick: () -> Unit
+    onFinishClick: () -> Unit,
+    onReturnClick: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -206,6 +209,19 @@ private fun RewardContent(
         Spacer(modifier = Modifier.weight(1f))
 
         Button(
+            onClick = onReturnClick,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(56.dp),
+            shape = RoundedCornerShape(28.dp),
+            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondary)
+        ) {
+            Text("出発地点へ帰る", fontSize = 18.sp, fontWeight = FontWeight.Bold)
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        OutlinedButton(
             onClick = onFinishClick,
             modifier = Modifier
                 .fillMaxWidth()

@@ -1,6 +1,10 @@
 package com.mysterywalk.app.ui.navigation
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -27,13 +31,42 @@ fun NavScreen(
     val navState by viewModel.navigationManager.navState.collectAsState()
     val isArrived by viewModel.navigationManager.isArrived.collectAsState()
     val targetSpot by viewModel.navigationManager.targetSpot.collectAsState()
+    val isReturnMode by viewModel.navigationManager.isReturnMode.collectAsState()
+    val isOnline by viewModel.isOnline.collectAsState()
 
     Surface(modifier = Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            AnimatedVisibility(
+                visible = !isOnline,
+                enter = expandVertically(),
+                exit = shrinkVertically()
+            ) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(MaterialTheme.colorScheme.errorContainer)
+                        .padding(8.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = "オフラインですが、ナビゲーションは継続可能です",
+                        color = MaterialTheme.colorScheme.onErrorContainer,
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Medium
+                    )
+                }
+            }
+
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .weight(1f),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
             when (uiState) {
                 is NavUiState.Idle -> {
                     Text("ブラインド・ナビゲーション", fontSize = 24.sp, fontWeight = FontWeight.Bold)
@@ -64,7 +97,8 @@ fun NavScreen(
                         val distance = navState?.distanceMeters ?: 0
                         val relativeBearing = navState?.relativeBearingDegrees ?: 0f
 
-                        Text("目的地まで", fontSize = 20.sp)
+                        val titleText = if (isReturnMode) "出発地点まで" else "目的地まで"
+                        Text(titleText, fontSize = 20.sp)
                         Text("$distance m", fontSize = 48.sp, fontWeight = FontWeight.Bold)
                         
                         Spacer(modifier = Modifier.height(64.dp))
@@ -72,8 +106,18 @@ fun NavScreen(
                         CompassArrow(bearing = relativeBearing)
 
                         Spacer(modifier = Modifier.height(64.dp))
-                        Button(onClick = { viewModel.stopNavigation() }) {
-                            Text("ナビゲーションを中止")
+                        Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+                            if (!isReturnMode) {
+                                Button(
+                                    onClick = { viewModel.enableReturnMode() },
+                                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondary)
+                                ) {
+                                    Text("中断して帰還する")
+                                }
+                            }
+                            Button(onClick = { viewModel.stopNavigation() }) {
+                                Text("ナビゲーションを中止")
+                            }
                         }
                     }
                 }
@@ -87,6 +131,7 @@ fun NavScreen(
             }
         }
     }
+}
 }
 
 @Composable

@@ -5,8 +5,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.navArgument
 import com.mysterywalk.app.ui.reward.RewardScreen
+import com.mysterywalk.app.ui.reward.RewardViewModel
 
 @Composable
 fun AppNavGraph(navController: NavHostController) {
@@ -40,6 +42,8 @@ fun AppNavGraph(navController: NavHostController) {
             val name = if (rawName == "Unknown") null else rawName
             val rawCategory = backStackEntry.arguments?.getString("category")
             val category = if (rawCategory == "None") null else rawCategory
+            
+            val viewModel: RewardViewModel = hiltViewModel()
 
             RewardScreen(
                 distanceMeters = distance,
@@ -47,7 +51,15 @@ fun AppNavGraph(navController: NavHostController) {
                 lon = lon,
                 name = name,
                 category = category,
+                viewModel = viewModel,
                 onFinishClick = {
+                    viewModel.stopNavigation()
+                    navController.navigate("nav_screen") {
+                        popUpTo("reward_screen") { inclusive = true }
+                    }
+                },
+                onReturnClick = {
+                    viewModel.enableReturnMode()
                     navController.navigate("nav_screen") {
                         popUpTo("reward_screen") { inclusive = true }
                     }

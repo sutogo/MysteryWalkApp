@@ -3,6 +3,7 @@ package com.mysterywalk.app.ui.reward
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mysterywalk.app.data.remote.WikimediaApi
+import com.mysterywalk.app.domain.manager.NavigationManager
 import com.mysterywalk.app.domain.usecase.ProcessArrivalUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -26,7 +27,8 @@ data class RewardUiState(
 @HiltViewModel
 class RewardViewModel @Inject constructor(
     private val processArrivalUseCase: ProcessArrivalUseCase,
-    private val wikimediaApi: WikimediaApi
+    private val wikimediaApi: WikimediaApi,
+    private val navigationManager: NavigationManager
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(RewardUiState())
@@ -69,5 +71,13 @@ class RewardViewModel @Inject constructor(
                 destinationCategory = category
             )
         }
+    }
+
+    fun enableReturnMode() {
+        navigationManager.enableReturnMode()
+    }
+
+    fun stopNavigation() {
+        navigationManager.clear()
     }
 }
