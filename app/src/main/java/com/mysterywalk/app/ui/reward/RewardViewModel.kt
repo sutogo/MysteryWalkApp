@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.mysterywalk.app.data.remote.WikimediaApi
 import com.mysterywalk.app.domain.manager.NavigationManager
 import com.mysterywalk.app.domain.usecase.ProcessArrivalUseCase
+import com.mysterywalk.app.domain.usecase.SaveHistoryUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -27,6 +28,7 @@ data class RewardUiState(
 @HiltViewModel
 class RewardViewModel @Inject constructor(
     private val processArrivalUseCase: ProcessArrivalUseCase,
+    private val saveHistoryUseCase: SaveHistoryUseCase,
     private val wikimediaApi: WikimediaApi,
     private val navigationManager: NavigationManager
 ) : ViewModel() {
@@ -58,7 +60,20 @@ class RewardViewModel @Inject constructor(
                 e.printStackTrace()
             }
 
-            // 3. Update State
+            val safeName = name ?: "Unknown Spot"
+            val safeCategory = category ?: "None"
+
+            // 3. Save History
+            saveHistoryUseCase(
+                distanceMeters = distanceMeters,
+                lat = lat,
+                lon = lon,
+                name = safeName,
+                category = safeCategory,
+                imageUrl = imageUrl
+            )
+
+            // 4. Update State
             _uiState.value = _uiState.value.copy(
                 isLoading = false,
                 distanceWalkedMeters = distanceMeters,
@@ -67,8 +82,8 @@ class RewardViewModel @Inject constructor(
                 newLevel = arrivalResult.newLevel,
                 isLevelUp = arrivalResult.isLevelUp,
                 imageUrl = imageUrl,
-                destinationName = name ?: "Unknown Spot",
-                destinationCategory = category
+                destinationName = safeName,
+                destinationCategory = safeCategory
             )
         }
     }

@@ -42,7 +42,7 @@ fun RewardScreen(
         viewModel.loadReward(distanceMeters, lat, lon, name, category)
     }
 
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(modifier = Modifier.fillMaxSize().systemBarsPadding()) {
         if (uiState.isLoading) {
             CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
         } else {

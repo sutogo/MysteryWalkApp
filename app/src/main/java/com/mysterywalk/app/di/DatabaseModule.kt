@@ -25,7 +25,7 @@ object DatabaseModule {
             context,
             AppDatabase::class.java,
             "mystery_walk_db"
-        ).build()
+        ).fallbackToDestructiveMigration().build()
     }
 
     @Provides
@@ -39,10 +39,23 @@ object DatabaseModule {
     }
 
     @Provides
+    fun provideHistoryDao(database: AppDatabase): com.mysterywalk.app.data.local.HistoryDao {
+        return database.historyDao()
+    }
+
+    @Provides
     @Singleton
     fun provideGamificationRepository(
         userProgressDao: UserProgressDao
     ): GamificationRepository {
         return GamificationRepositoryImpl(userProgressDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideHistoryRepository(
+        historyDao: com.mysterywalk.app.data.local.HistoryDao
+    ): com.mysterywalk.app.domain.repository.HistoryRepository {
+        return com.mysterywalk.app.data.repository.HistoryRepositoryImpl(historyDao)
     }
 }

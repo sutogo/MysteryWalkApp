@@ -25,6 +25,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 @Composable
 fun NavScreen(
     onArrived: (distance: Int, lat: Double, lon: Double, name: String?, category: String?) -> Unit,
+    onHistoryClick: () -> Unit,
     viewModel: NavigationViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -34,7 +35,7 @@ fun NavScreen(
     val isReturnMode by viewModel.navigationManager.isReturnMode.collectAsState()
     val isOnline by viewModel.isOnline.collectAsState()
 
-    Surface(modifier = Modifier.fillMaxSize()) {
+    Surface(modifier = Modifier.fillMaxSize().systemBarsPadding()) {
         Column(
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
@@ -73,6 +74,10 @@ fun NavScreen(
                     Spacer(modifier = Modifier.height(32.dp))
                     Button(onClick = { viewModel.findSpotAndStartNavigation(1000) }) {
                         Text("1km圏内のランダムな場所へ出発")
+                    }
+                    Spacer(modifier = Modifier.height(16.dp))
+                    OutlinedButton(onClick = onHistoryClick) {
+                        Text("履歴＆振り返り")
                     }
                 }
                 is NavUiState.Loading -> {

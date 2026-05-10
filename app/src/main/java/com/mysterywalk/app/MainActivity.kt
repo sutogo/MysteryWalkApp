@@ -20,7 +20,9 @@ import android.os.Build
 import androidx.navigation.compose.rememberNavController
 import com.mysterywalk.app.ui.navigation.AppNavGraph
 import com.mysterywalk.app.ui.theme.MysteryWalkAppTheme
+import org.osmdroid.config.Configuration
 import dagger.hilt.android.AndroidEntryPoint
+import android.content.Context
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -42,6 +44,9 @@ class MainActivity : ComponentActivity() {
             permissions.add(Manifest.permission.POST_NOTIFICATIONS)
         }
         requestPermissionLauncher.launch(permissions.toTypedArray())
+
+        // Initialize osmdroid
+        Configuration.getInstance().load(this, getSharedPreferences("osmdroid", Context.MODE_PRIVATE))
 
         enableEdgeToEdge()
         setContent {

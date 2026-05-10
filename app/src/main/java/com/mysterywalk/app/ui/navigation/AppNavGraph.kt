@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.navArgument
+import com.mysterywalk.app.ui.history.HistoryScreen
 import com.mysterywalk.app.ui.reward.RewardScreen
 import com.mysterywalk.app.ui.reward.RewardViewModel
 
@@ -21,6 +22,9 @@ fun AppNavGraph(navController: NavHostController) {
                     navController.navigate("reward_screen/$distance/$lat/$lon/$encodedName/$encodedCategory") {
                         popUpTo("nav_screen") { inclusive = true }
                     }
+                },
+                onHistoryClick = {
+                    navController.navigate("history_screen")
                 }
             )
         }
@@ -63,6 +67,14 @@ fun AppNavGraph(navController: NavHostController) {
                     navController.navigate("nav_screen") {
                         popUpTo("reward_screen") { inclusive = true }
                     }
+                }
+            )
+        }
+
+        composable("history_screen") {
+            HistoryScreen(
+                onBackClick = {
+                    navController.popBackStack()
                 }
             )
         }
