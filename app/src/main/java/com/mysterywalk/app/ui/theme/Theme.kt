@@ -1,47 +1,60 @@
 package com.mysterywalk.app.ui.theme
 
-import android.os.Build
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.dynamicDarkColorScheme
-import androidx.compose.material3.dynamicLightColorScheme
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.graphics.Color
 
-private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
-)
+// ─────────────────────────────────────────────
+//  Neon Explorer ダークカラースキーム
+//  dynamicColor は使用しない（デザインを安定させるため）
+// ─────────────────────────────────────────────
+private val NeonExplorerDarkColorScheme = darkColorScheme(
+    primary              = NeonCyan,
+    onPrimary            = DeepSlate,
+    primaryContainer     = NeonCyanGlow,
+    onPrimaryContainer   = NeonCyan,
 
-private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
+    secondary            = ElectricPurple,
+    onSecondary          = DeepSlate,
+    secondaryContainer   = Color(0xFF2D1B4E),
+    onSecondaryContainer = ElectricPurple,
+
+    tertiary             = GoldBright,
+    onTertiary           = DeepSlate,
+    tertiaryContainer    = GoldGlow,
+    onTertiaryContainer  = GoldBright,
+
+    background           = DeepSlate,
+    onBackground         = OnDark,
+
+    surface              = MidnightBlue,
+    onSurface            = OnDark,
+    surfaceVariant       = SurfaceVariant,
+    onSurfaceVariant     = OnDarkSecondary,
+
+    error                = NeonRed,
+    onError              = DeepSlate,
+    errorContainer       = Color(0xFF3A0A15),
+    onErrorContainer     = NeonRed,
+
+    outline              = NeonCyanDim,
+    outlineVariant       = SurfaceVariant,
+
+    inverseSurface       = OnDark,
+    inverseOnSurface     = DeepSlate,
+    inversePrimary       = NeonCyanDim,
+
+    scrim                = Color(0xCC000000)
 )
 
 @Composable
 fun MysteryWalkAppTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
-    val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
-
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
-    }
-
     MaterialTheme(
-        colorScheme = colorScheme,
-        typography = Typography,
-        content = content
+        colorScheme = NeonExplorerDarkColorScheme,
+        typography  = Typography,
+        content     = content
     )
 }
