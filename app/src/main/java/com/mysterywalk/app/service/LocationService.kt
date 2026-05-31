@@ -3,6 +3,7 @@ package com.mysterywalk.app.service
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.Service
+import com.mysterywalk.app.R
 import android.content.Context
 import android.content.Intent
 import android.os.Build
@@ -53,8 +54,7 @@ class LocationService : Service() {
         val notification = NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle("Mystery Walk")
             .setContentText("ブラインド・ナビゲーション実行中")
-            // デフォルトのアイコンで仮置き
-            .setSmallIcon(android.R.drawable.ic_menu_mylocation)
+            .setSmallIcon(R.drawable.ic_notification)
             .setOngoing(true)
             .build()
 

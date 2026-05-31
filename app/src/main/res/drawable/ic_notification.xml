@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Mystery Walk — 通知バー用アイコン
+    通知アイコンはモノクロ（白 + 透明背景）でなければならない
+    Android のシステムが自動でテーマカラーに塗ってくれる
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24"
+    android:tint="@android:color/white">
+
+    <!-- 外周リング -->
+    <path
+        android:pathData="M12,2 C6.48,2 2,6.48 2,12 C2,17.52 6.48,22 12,22 C17.52,22 22,17.52 22,12 C22,6.48 17.52,2 12,2 Z M12,20 C7.59,20 4,16.41 4,12 C4,7.59 7.59,4 12,4 C16.41,4 20,7.59 20,12 C20,16.41 16.41,20 12,20 Z"
+        android:fillColor="#FFFFFF" />
+
+    <!-- 北向き針（上の三角）-->
+    <path
+        android:pathData="M12,5 L14,12 L12,10.5 L10,12 Z"
+        android:fillColor="#FFFFFF" />
+
+    <!-- 南向き針（下の三角、やや細め）-->
+    <path
+        android:pathData="M12,19 L13.5,12 L12,13.5 L10.5,12 Z"
+        android:fillColor="#FFFFFF"
+        android:fillAlpha="0.6" />
+
+    <!-- 中心ドット -->
+    <path
+        android:pathData="M12,12 m-1.2,0 a1.2,1.2 0 1,0 2.4,0 a1.2,1.2 0 1,0 -2.4,0"
+        android:fillColor="#FFFFFF" />
+
+</vector>
