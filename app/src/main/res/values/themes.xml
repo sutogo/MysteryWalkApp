@@ -16,10 +16,10 @@
     </style>
 
     <!-- SplashScreen 表示後の実際のアプリテーマ -->
+    <!-- enableEdgeToEdge() がステータスバー/ナビゲーションバーを自動管理するため -->
+    <!-- android:statusBarColor / navigationBarColor はここで設定しない -->
     <style name="Theme.MysteryWalkApp.Main" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:windowBackground">@color/splash_background</item>
-        <item name="android:statusBarColor">@color/splash_background</item>
-        <item name="android:navigationBarColor">@color/splash_background</item>
     </style>
 
 </resources>

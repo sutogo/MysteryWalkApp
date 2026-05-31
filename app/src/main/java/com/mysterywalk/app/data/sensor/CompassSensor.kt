@@ -27,8 +27,10 @@ class DefaultCompassSensor @Inject constructor(
 
     override fun getAzimuthUpdates(): Flow<Float> = callbackFlow {
         if (rotationSensor == null) {
-            // エミュレータ等でセンサーがない場合はクラッシュさせず、常に0度を返す
+            // センサーが存在しない端末（エミュレータ等）は常に 0 度を送信して Flow を閉じる
             trySend(0f)
+            close()
+            awaitClose { /* nothing to unregister */ }
             return@callbackFlow
         }
 
