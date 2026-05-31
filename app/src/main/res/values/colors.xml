@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- アプリ全体カラー（Material旧来互換用）-->
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
@@ -7,4 +8,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Mystery Walk テーマカラー -->
+    <color name="deep_slate">#FF0F172A</color>   <!-- メイン背景 -->
+    <color name="neon_cyan">#FF00F0FF</color>     <!-- メインアクセント -->
+    <color name="gold_bright">#FFFFD700</color>  <!-- XP/レベル -->
+
+    <!-- SplashScreen 用 -->
+    <color name="splash_background">#FF0F172A</color>   <!-- Deep Slate (ダーク背景) -->
+    <color name="splash_icon_bg">#FF1E293B</color>      <!-- MidnightBlue (アイコン背景円) -->
 </resources>

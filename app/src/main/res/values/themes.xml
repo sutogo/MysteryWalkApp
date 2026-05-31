@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--
+        通常の起動テーマ
+        SplashScreen API を使用するため Theme.SplashScreen を親に設定
+    -->
+    <style name="Theme.MysteryWalkApp" parent="Theme.SplashScreen">
+        <!-- SplashScreen: 背景色 -->
+        <item name="windowSplashScreenBackground">@color/splash_background</item>
+        <!-- SplashScreen: 中央アイコン -->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash_compass</item>
+        <!-- SplashScreen: アイコン背景（アイコンの背景丸を塗る色）-->
+        <item name="windowSplashScreenIconBackgroundColor">@color/splash_icon_bg</item>
+        <!-- SplashScreen 終了後に遷移するテーマ -->
+        <item name="postSplashScreenTheme">@style/Theme.MysteryWalkApp.Main</item>
+    </style>
 
-    <style name="Theme.MysteryWalkApp" parent="android:Theme.Material.Light.NoActionBar" />
+    <!-- SplashScreen 表示後の実際のアプリテーマ -->
+    <style name="Theme.MysteryWalkApp.Main" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/splash_background</item>
+        <item name="android:statusBarColor">@color/splash_background</item>
+        <item name="android:navigationBarColor">@color/splash_background</item>
+    </style>
+
 </resources>

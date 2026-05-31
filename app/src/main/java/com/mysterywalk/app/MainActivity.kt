@@ -17,6 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.activity.result.contract.ActivityResultContracts
 import android.Manifest
 import android.os.Build
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.rememberNavController
 import com.mysterywalk.app.ui.navigation.AppNavGraph
 import com.mysterywalk.app.ui.theme.MysteryWalkAppTheme
@@ -33,6 +34,8 @@ class MainActivity : ComponentActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // SplashScreen API: super.onCreate() より前に呼ぶ必要がある
+        installSplashScreen()
         super.onCreate(savedInstanceState)
 
         // 必要な権限を要求

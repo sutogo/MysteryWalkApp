@@ -20,7 +20,9 @@ coil = "2.6.0"
 playServicesLocation = "21.3.0"
 junit = "4.13.2"
 junitVersion = "1.3.0"
+composeUiTextGoogleFonts = "1.8.1"
 espressoCore = "3.7.0"
+splashscreen = "1.0.1"
 
 [libraries]
 # AndroidX Core
@@ -39,6 +41,7 @@ androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-
 androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-compose-material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
+androidx-compose-ui-text-google-fonts = { group = "androidx.compose.ui", name = "ui-text-google-fonts", version.ref = "composeUiTextGoogleFonts" }
 
 # Navigation
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
@@ -74,6 +77,9 @@ coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coi
 
 # Location
 play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "playServicesLocation" }
+
+# Splash Screen
+androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splashscreen" }
 
 # Testing
 junit = { group = "junit", name = "junit", version.ref = "junit" }

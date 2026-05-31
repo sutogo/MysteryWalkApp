@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Mystery Walk — スプラッシュ画面用アイコン
+    SplashScreen API の windowSplashScreenAnimatedIcon に使用
+    コンパス + グロー演出（108dp × 108dp）
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- 外周リング -->
+    <path
+        android:pathData="M54,54 m-38,0 a38,38 0 1,0 76,0 a38,38 0 1,0 -76,0"
+        android:fillColor="#00000000"
+        android:strokeWidth="1.5">
+        <aapt:attr name="android:strokeColor">
+            <gradient
+                android:type="sweep"
+                android:centerX="54"
+                android:centerY="54">
+                <item android:offset="0.0" android:color="#FF00F0FF"/>
+                <item android:offset="0.5" android:color="#4000F0FF"/>
+                <item android:offset="1.0" android:color="#FF00F0FF"/>
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- 内周点線円 -->
+    <path
+        android:pathData="M54,54 m-30,0 a30,30 0 1,0 60,0 a30,30 0 1,0 -60,0"
+        android:fillColor="#00000000"
+        android:strokeColor="#1A3A4A"
+        android:strokeWidth="0.6"
+        android:strokeLineCap="round" />
+
+    <!-- 方位目盛り -->
+    <path android:pathData="M54,16 L54,23" android:strokeColor="#00F0FF" android:strokeWidth="3" android:fillColor="#00000000" android:strokeLineCap="round"/>
+    <path android:pathData="M54,85 L54,92" android:strokeColor="#00B8C8" android:strokeWidth="2" android:fillColor="#00000000" android:strokeLineCap="round"/>
+    <path android:pathData="M85,54 L92,54" android:strokeColor="#00B8C8" android:strokeWidth="2" android:fillColor="#00000000" android:strokeLineCap="round"/>
+    <path android:pathData="M16,54 L23,54" android:strokeColor="#00B8C8" android:strokeWidth="2" android:fillColor="#00000000" android:strokeLineCap="round"/>
+
+    <!-- 北向き針グロー -->
+    <path android:pathData="M54,19 L59,54 L54,48 L49,54 Z" android:fillColor="#4000F0FF"/>
+    <!-- 北向き針本体 -->
+    <path android:pathData="M54,20 L58,54 L54,50 L50,54 Z" android:fillColor="#00F0FF"/>
+
+    <!-- 南向き針グロー -->
+    <path android:pathData="M54,89 L59,54 L54,60 L49,54 Z" android:fillColor="#40FFD700"/>
+    <!-- 南向き針本体 -->
+    <path android:pathData="M54,88 L58,54 L54,58 L50,54 Z" android:fillColor="#FFD700"/>
+
+    <!-- 中心ピボットグロー -->
+    <path android:pathData="M54,54 m-6,0 a6,6 0 1,0 12,0 a6,6 0 1,0 -12,0" android:fillColor="#2000F0FF"/>
+    <!-- 中心リング -->
+    <path android:pathData="M54,54 m-4,0 a4,4 0 1,0 8,0 a4,4 0 1,0 -8,0"
+        android:fillColor="#0F172A"
+        android:strokeColor="#00F0FF"
+        android:strokeWidth="1.8"/>
+    <!-- 中心点 -->
+    <path android:pathData="M54,54 m-1.5,0 a1.5,1.5 0 1,0 3,0 a1.5,1.5 0 1,0 -3,0" android:fillColor="#00F0FF"/>
+
+</vector>
